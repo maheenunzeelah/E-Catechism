@@ -1,3 +1,83 @@
+// ...existing code...
+# Node (project-level & nested)
+**/node_modules/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+# lockfiles (optional — keep if you want deterministic installs)
+# package-lock.json
+# pnpm-lock.yaml
+# yarn.lock
+
+# Client build outputs
+Client/build/
+Client/dist/
+Client/.cache/
+Client/.parcel-cache/
+Client/coverage/
+
+# Client environment & logs
+Client/.env
+Client/.env.local
+Client/*.log
+Client/.DS_Store
 Client/MDB-React-Free-npm.zip
 Client/package-lock.json
-Client/debug.log
+
+# Server node artifacts & logs
+Server/node_modules/
+Server/npm-debug.log*
+Server/*.log
+Server/Procfile.dev
+
+# Python artifacts (Server)
+**/__pycache__/
+**/*.py[cod]
+**/*.pyo
+**/*.pyd
+env/
+venv/
+.venv/
+.env/
+*.egg-info/
+dist/
+build/
+
+# Model & large data artifacts
+Server/speaker_models/
+**/*.h5
+**/*.pkl
+**/*.pt
+**/*.ckpt
+signupVoices.txt
+loginVoices.txt
+matchVoices.txt
+# any other generated dataset/model files
+data/
+models/
+outputs/
+
+# Secrets and config overrides
+Server/config/keys.js
+Server/config/keys_prod.js
+/config/keys_dev.js
+*.key
+*.pem
+*.crt
+
+# IDEs & editors
+.vscode/
+.idea/
+*.suo
+*.user
+*.sln
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git internals for nested repos (if you accidentally left a nested .git)
+Client/.git
+Server/.git
+# If Client is intended as a submodule, don't remove .git; instead set up .gitmodules correctly.
