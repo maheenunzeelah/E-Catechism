@@ -25,7 +25,7 @@ class Dashboard extends Component {
    
    if (isAuthenticatedTeacher) {
       return (
-        <MDBNavbar style={{ background: "linear-gradient(135deg, #6D28D9 0%, #5B21B6 100%)", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)" }} dark expand="md">
+<MDBNavbar style={{ background: "linear-gradient(135deg, #6D28D9 0%, #5B21B6 100%)", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)" }} dark expand="md">
           <MDBNavbarToggler onClick={this.toggleCollapse} />
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
             <MDBNavbarNav left>
@@ -120,11 +120,19 @@ class Dashboard extends Component {
     else if (isAuthenticatedStudent) {
       return (
         <Router>
+
         <MDBNavbar style={{ background: "#ffffff", borderBottom: "1px solid #e5e7eb" }} className="purple-text" expand="md">
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
           <MDBNavbarBrand>
             <strong><h3 className="font-weight-bold" style={{color:'#6D28D9'}}>E-Catechism</h3></strong>
+
+        <MDBNavbar className="blue lighten-4 pink-text"  expand="md">
+        <MDBNavbarToggler onClick={this.toggleCollapse} />
+        <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
+          <MDBNavbarBrand>
+            <strong><h3 className="font-weight-bold">E-Catechism</h3></strong>
+
           </MDBNavbarBrand>
           
           <MDBNavbarNav right>
@@ -135,7 +143,11 @@ class Dashboard extends Component {
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBNavbar>  
+
         <MDBNavbar style={{ background: "linear-gradient(135deg, #6D28D9 0%, #5B21B6 100%)", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)" }} dark expand="md">
+
+        <MDBNavbar style={{ backgroundColor: "rgb(47, 156, 181)" }} dark expand="md">
+
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
       
