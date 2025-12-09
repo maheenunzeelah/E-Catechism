@@ -1,0 +1,26 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+MDB-React-Free-npm.zip
+video.mp4
+.vscode/
+.idea/
+*.local.env.json
+*.local.env.js
+package-lock.json
+yarn.lock
+debug.log

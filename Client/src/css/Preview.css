@@ -1,0 +1,68 @@
+.test_nav{
+  background-color: #ffffff;
+  color: #1f2937;
+  margin: 5%;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#main_nav{
+  
+  background: linear-gradient(135deg, #6D28D9 0%, #5B21B6 100%);
+  color: white;
+  font-size: 20px;
+  margin: 1%;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+#Assign_page{
+  margin: 5%;
+
+}
+
+#Assign_content{
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding:3%;
+  background-color: #1f1f1f;
+  color: #e5e5e5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#g_assign{
+  background-color: #1f1f1f;
+  color: #e5e5e5;
+  font-size: 13px;
+  border-right: 1px solid #2a2a2a;
+  
+}
+
+#l_assign{
+  background-color: #1f1f1f;
+  color: #e5e5e5;
+  font-size: 13px;
+}
+
+#main_ass{
+  background-color:#1f1f1f;
+  color: #e5e5e5;
+}
+
+#OR{
+
+  margin-top: 10%;
+  font-size: 20px;
+  color: #e5e5e5;
+}
+
+#OR center{
+  background: linear-gradient(135deg, #6D28D9 0%, #5B21B6 100%);
+  border-radius: 100px;
+  width: 70px;
+  height: 70px;
+ margin-left: 3px;
+ padding-top: 10px;
+ box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}

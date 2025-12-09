@@ -1,0 +1,388 @@
+/* Professional Light Purple Theme */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-card: #ffffff;
+  --bg-hover: #f1f3f5;
+  --purple-primary: #6D28D9;
+  --purple-dark: #5B21B6;
+  --purple-light: #8B5CF6;
+  --purple-accent: #7C3AED;
+  --purple-light-bg: #F3F4F6;
+  --purple-glow: rgba(109, 40, 217, 0.15);
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --border-color: #e5e7eb;
+  --border-purple: #c4b5fd;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+  background-attachment: fixed !important;
+  color: var(--text-primary) !important;
+  min-height: 100vh;
+}
+
+/* Professional Card Styling */
+.card,
+.jumbotron {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow-md) !important;
+  transition: all 0.3s ease !important;
+}
+
+.card:hover,
+.jumbotron:hover {
+  border-color: var(--border-purple) !important;
+  box-shadow: var(--shadow-lg) !important;
+  transform: translateY(-2px) !important;
+}
+
+.container {
+  background: transparent !important;
+  color: var(--text-primary) !important;
+}
+
+/* Purple Theme Overrides */
+.purple-text {
+  color: var(--purple-primary) !important;
+}
+
+.purple-bg {
+  background-color: var(--purple-primary) !important;
+}
+
+.purple-light-bg {
+  background-color: var(--purple-light-bg) !important;
+}
+
+.purple-light-4 {
+  background-color: var(--purple-light-bg) !important;
+  border: 1px solid var(--border-purple) !important;
+}
+
+.purple-light-5 {
+  background-color: var(--purple-light-bg) !important;
+  border: 1px solid var(--border-purple) !important;
+}
+
+/* Override MDB pink classes with professional purple - NO #e91e63 */
+/* Removed pink-text - use inline styles or purple-text class instead */
+.pink-text {
+  color: var(--purple-primary) !important;
+}
+
+.btn.pink,
+button.pink,
+a.btn.pink {
+  background: linear-gradient(135deg, var(--purple-primary) 0%, var(--purple-dark) 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 10px 24px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.btn.pink:hover,
+button.pink:hover,
+a.btn.pink:hover {
+  background: linear-gradient(135deg, var(--purple-light) 0%, var(--purple-primary) 100%) !important;
+  box-shadow: var(--shadow-lg) !important;
+  transform: translateY(-2px) !important;
+}
+
+.pink.lighten-4,
+.pink.lighten-5 {
+  background-color: var(--purple-light-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-purple) !important;
+}
+
+.pink.accent-2,
+.pink.accent-3 {
+  background: linear-gradient(135deg, var(--purple-primary) 0%, var(--purple-dark) 100%) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.pink.accent-2:hover,
+.pink.accent-3:hover {
+  background: linear-gradient(135deg, var(--purple-light) 0%, var(--purple-primary) 100%) !important;
+  color: white !important;
+}
+
+/* Ensure button text is always visible */
+button,
+.btn,
+.MDBBtn,
+[class*="MDBBtn"],
+[class*="btn"] {
+  color: inherit !important;
+}
+
+button.pink,
+.btn.pink,
+.pink.accent-2,
+.pink.accent-3,
+button[class*="pink"],
+.btn[class*="pink"] {
+  color: white !important;
+}
+
+/* Override black-text on colored buttons */
+.black-text.pink,
+.black-text[class*="pink"],
+button.black-text.pink,
+.btn.black-text.pink {
+  color: white !important;
+}
+
+/* Fix white-text on light backgrounds */
+.white-text {
+  color: var(--text-primary) !important;
+}
+
+button.white-text,
+.btn.white-text {
+  color: white !important;
+  background-color: var(--purple-primary) !important;
+}
+
+/* Ensure navbar text is visible */
+.navbar-brand,
+.navbar-brand h3,
+.navbar-brand h1,
+.navbar-brand h2,
+.navbar-brand h4,
+.navbar-brand h5,
+.navbar-brand h6 {
+  color: inherit !important;
+}
+
+.navb .navbar-brand,
+.navb .navbar-brand * {
+  color: white !important;
+}
+
+/* Fix MDBBtn text visibility */
+.MDBBtn,
+[class*="MDBBtn"],
+button[class*="MDBBtn"] {
+  color: inherit !important;
+}
+
+.MDBBtn.pink,
+.MDBBtn[class*="pink"],
+button[class*="MDBBtn"].pink {
+  color: white !important;
+}
+
+.MDBBtn.color-black,
+.MDBBtn[color="black"] {
+  background-color: var(--text-primary) !important;
+  color: white !important;
+}
+
+.MDBBtn.color-black.basic,
+.MDBBtn[color="black"].basic {
+  background-color: transparent !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--text-primary) !important;
+}
+
+/* COMPLETELY REMOVE #e91e63 - Replace with theme purple */
+/* This color is NEVER used in our theme */
+
+/* Override any inline styles using #e91e63 */
+[style*="#e91e63"],
+[style*="rgb(233, 30, 99)"],
+[style*="233, 30, 99"] {
+  color: var(--purple-primary) !important;
+  background-color: var(--purple-primary) !important;
+  border-color: var(--purple-primary) !important;
+}
+
+/* Material-UI/MDB pink color overrides - use purple instead */
+.mdb-pink,
+.material-pink,
+[class*="pink-500"],
+[class*="pink-600"],
+[class*="pink-accent"] {
+  color: var(--purple-primary) !important;
+  background-color: var(--purple-primary) !important;
+  border-color: var(--purple-primary) !important;
+}
+
+/* Override Material Design pink shades - replace with purple */
+[style*="color: #e91e63"],
+[style*="background-color: #e91e63"],
+[style*="background: #e91e63"],
+[style*="border-color: #e91e63"] {
+  color: var(--purple-primary) !important;
+  background-color: var(--purple-primary) !important;
+  border-color: var(--purple-primary) !important;
+}
+
+/* Material-UI Button overrides */
+.MuiButton-containedPrimary,
+.MuiButton-root.pink,
+button.MuiButton-root.pink,
+button.pink {
+  background: linear-gradient(135deg, var(--purple-primary) 0%, var(--purple-dark) 100%) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.MuiButton-containedPrimary:hover,
+.MuiButton-root.pink:hover,
+button.pink:hover {
+  background: linear-gradient(135deg, var(--purple-light) 0%, var(--purple-primary) 100%) !important;
+}
+
+/* Additional overrides */
+.red-text {
+  color: var(--purple-primary) !important;
+}
+
+/* Remove yellow colors - use purple instead */
+.yellow,
+.yellow-text,
+.amber,
+.amber-text {
+  color: var(--purple-primary) !important;
+  background-color: transparent !important;
+}
+
+/* Text color classes - NO #e91e63 */
+.text-pink {
+  color: var(--purple-primary) !important;
+}
+
+/* Professional Input Fields */
+input,
+textarea,
+select {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  transition: all 0.3s ease !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--purple-primary) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px var(--purple-glow) !important;
+}
+
+/* Professional Links */
+a {
+  color: var(--purple-primary) !important;
+  transition: color 0.3s ease !important;
+}
+
+a:hover {
+  color: var(--purple-light) !important;
+}
+
+/* Professional Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-purple);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--purple-primary);
+}
+
+/* Professional Form Elements */
+.form-control,
+.form-select {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--bg-primary) !important;
+  border-color: var(--purple-primary) !important;
+  box-shadow: 0 0 0 3px var(--purple-glow) !important;
+}
+
+/* Professional Buttons */
+.btn {
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+  font-weight: 500 !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--purple-primary) 0%, var(--purple-dark) 100%) !important;
+  border: none !important;
+  box-shadow: var(--shadow-md) !important;
+  color: white !important;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--purple-light) 0%, var(--purple-primary) 100%) !important;
+  box-shadow: var(--shadow-lg) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Professional List Groups */
+.list-group-item {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+  transition: all 0.3s ease !important;
+}
+
+.list-group-item:hover {
+  background-color: var(--bg-hover) !important;
+  border-color: var(--border-purple) !important;
+  color: var(--purple-primary) !important;
+}
+
+/* Professional Tables */
+table {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+th {
+  background-color: var(--purple-primary) !important;
+  color: white !important;
+}
+
+td {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+

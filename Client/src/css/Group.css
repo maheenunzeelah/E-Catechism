@@ -1,0 +1,107 @@
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+
+#Setting{
+  border-right: 2px gray solid;
+  padding: 10px;
+}
+
+#Preview{
+  
+  padding: 10px;
+}
+#tab{
+    
+  background-color: black;
+  color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+  
+      }
+
+#Links{
+
+  color: #6D28D9;
+}
+
+#toplinks p{
+
+  font-size: 15px;    
+}
+
+#toplinks a{
+  padding-left: 20px;
+  font-size: 15px;
+  color: black;
+}
+
+
+.collapsible {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.active, .collapsible:hover {
+  background: linear-gradient(135deg, #6D28D9 0%, #5B21B6 100%);
+  color: white;
+  border-color: #7C3AED;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+  .content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #ffffff;
+    color: #1f2937;
+    border-radius: 0 0 8px 8px;
+    border: 1px solid #e5e7eb;
+    border-top: none;
+  }
+  
+  .dropbtn {
+    background-color: #ffffff;
+    color: #1f2937;
+    padding: 16px;
+    font-size: 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .dropbtn:hover {
+    background-color: #f1f3f5;
+    border-color: #c4b5fd;
+  }
+
+  #Group{
+
+    margin-top:-20px;
+    border: 1px gray solid;
+        border-radius: 10px;
+  }
+
+  #Group1{
+
+      background-color: #ffffff;
+      color: #1f2937;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+#Links .Link{
+margin-right: 20px;
+    
+  }
+ 

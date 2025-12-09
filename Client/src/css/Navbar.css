@@ -1,0 +1,86 @@
+/* Professional Navbar Styling */
+.links{
+    font-size: 16px;
+    color: #4b5563 !important;
+    transition: all 0.3s ease !important;
+    padding: 8px 12px !important;
+    border-radius: 6px;
+  }
+  .links:hover{
+    font-size: 16px;
+    font-weight: 600;
+    color: #6D28D9 !important;
+    background-color: rgba(109, 40, 217, 0.1);
+  }
+
+  .navb{
+    background: linear-gradient(135deg, #6D28D9 0%, #5B21B6 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    border-bottom: none !important;
+  }
+  
+  /* Ensure navbar text is white on purple background */
+  .navb h3,
+  .navb .navbar-brand,
+  .navb .navbar-brand h3,
+  .navb .navbar-brand * {
+    color: white !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+  }
+  
+  .navb .links,
+  .navb .nav-link,
+  .navb .nav-link *,
+  .navb .nav-link i {
+    color: white !important;
+  }
+  
+  .navb .links:hover,
+  .navb .nav-link:hover {
+    color: #c4b5fd !important;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .navb .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .navb .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  }
+
+  .subNav {
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+    border-top: 1px solid #e5e7eb !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    padding: 10px 0 !important;
+  }
+  
+  .subNav .links {
+    color: #4b5563 !important;
+    padding: 6px 12px !important;
+    border-radius: 6px;
+  }
+  
+  .subNav .links:hover {
+    color: #6D28D9 !important;
+    background-color: rgba(109, 40, 217, 0.1);
+    font-weight: 600;
+  }
+  
+  /* Navbar brand hover effect */
+  .navb .navbar-brand:hover {
+    opacity: 0.9;
+  }
+  
+  /* Professional spacing */
+  .navb .navbar-nav {
+    align-items: center;
+  }
+  
+  .navb .nav-item {
+    margin: 0 8px;
+  }

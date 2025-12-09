@@ -1,0 +1,94 @@
+.main_div{
+    margin-top:40px;
+    padding-top:40px;
+    padding-bottom:20px;
+    position: relative;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    width:100%;
+    font-size:15px;
+    color: white !important;
+}
+
+/* Footer text styling - ensure white text on purple background */
+.main_div h3,
+.main_div h1,
+.main_div h2,
+.main_div h4,
+.main_div h5,
+.main_div h6 {
+    color: white !important;
+    margin-bottom: 15px;
+}
+
+.main_div p {
+    color: rgba(255, 255, 255, 0.9) !important;
+    line-height: 1.6;
+}
+
+.main_div a {
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.main_div a:hover {
+    color: white !important;
+    text-decoration: underline;
+}
+
+.main_div ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.main_div li {
+    margin-bottom: 8px;
+}
+
+.footLink {
+    color: rgba(255, 255, 255, 0.9) !important;
+    transition: all 0.3s ease;
+}
+
+.footLink:hover {
+    font-size: 17px;
+    color: white !important;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.reg {
+    font-size: 18px;
+    font-weight: bold;
+    color: white !important;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.reg:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    color: white !important;
+}
+
+.footer-copyright {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.8) !important;
+    padding: 15px 0;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-copyright a {
+    color: white !important;
+    font-weight: 600;
+}
+
+.footer-copyright a:hover {
+    color: #c4b5fd !important;
+}

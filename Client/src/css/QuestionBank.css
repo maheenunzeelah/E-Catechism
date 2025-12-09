@@ -1,0 +1,153 @@
+/* 
+    #links p{
+    
+    font-size: 15px;    
+    }
+    
+    #links a{
+    padding-left: 20px;
+    font-size: 15px;
+    } */
+    
+    
+    a{
+    color: #6D28D9;
+    }
+    a:focus{
+        color: #7C3AED
+    } 
+    #tab{
+    
+    background-color: black;
+    color: white;
+    
+        }
+
+    #tab .tablink{
+        color: white;
+    }
+    
+    #QuestionBank label{
+    
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    
+    #QuestionBank{
+    
+        border: 1px gray solid;
+        border-radius: 10px;
+margin-top: -20px;
+    }
+    
+    #Questions{
+    
+    border: 1px gray solid;
+    border-radius: 10px;
+    }
+    
+    #btn{
+        border-radius: 10px;
+    
+    }
+    
+    /* #Questions #libtn{
+    
+        color:purple;
+    } */
+    #Question>p{
+        padding-left: 30px;
+        font-weight: bold
+    }
+    #Qheading{
+    
+        
+        color:#1f2937;
+        margin: 0px;
+        border-top: 1px solid #e5e7eb;
+        border-bottom: 1px solid #e5e7eb;
+        background-color: #f8f9fa;
+        padding: 15px;
+        
+    }
+    
+    #Qheading span{
+    
+        font-size: 27px;
+        font-weight: bold;
+    
+    }
+    
+    #Qheading li{
+        display: inline;
+        padding-left: 10px;
+        padding-right: 10px;
+        
+    }
+    
+    
+    #Qheading ul{
+        margin-top: 10px;
+    }
+    
+    #Question #options li{
+        display: inline;
+        border-left: 1px solid gray;
+        padding-left: 10px;
+        padding-right: 10px;
+        opacity: 0.7;
+        font-size: 15px
+    }
+    
+    #Question #options li:hover{
+        opacity: 2;
+        
+    }
+
+    
+    #ansoptions{
+    
+        list-style-type: upper-alpha;
+    }
+    
+    #Qtype .row{
+       
+        margin-top: -25px;
+        
+    }
+    .collapsible {
+        color: black;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+      }
+      .collapsible:hover{
+        cursor: pointer;
+        background-color: none;
+      }
+.pagin{
+    text-align: center;
+    margin-top:2rem;
+}     
+.pagin a{
+ text-decoration: none;
+ margin:0 1rem;
+ border:1px solid #e5e7eb;
+ padding: 0.5rem 1rem;
+ color: #1f2937;
+ border-radius: 8px;
+ background-color: #ffffff;
+ transition: all 0.3s ease;
+}
+.pagin a:hover,
+.pagin a:active{
+    background: linear-gradient(135deg, #6D28D9 0%, #5B21B6 100%);
+    color: white;
+    border-color: #7C3AED;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+}
