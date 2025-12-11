@@ -1,10 +1,6 @@
+// This file is deprecated - use config/keys.js instead
 module.exports = {
-
-    url://'mongodb+srv://catechism_2019:FinalYear2019@cluster0-yqhv7.mongodb.net/test?authSource=admin&retryWrites=true&w=majority',
-    'mongodb://localhost/project1',
-    
-    
-    serverport: 3001 
-
-}
-//,'mongodb+srv://catechism_2019:FinalYear2019@cluster0-yqhv7.mongodb.net/test?authSource=admin&retryWrites=true&w=majority',
+    url: process.env.MONGO_URI || 'mongodb://localhost/project1',
+    serverport: process.env.PORT || 3001,
+    secret: process.env.JWT_SECRET || 'your-secret-key-change-in-production'
+};

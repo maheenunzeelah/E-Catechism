@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+debug.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Voice files
+signupVoices.txt
+loginVoices.txt
+matchVoices.txt
+
+# Uploaded files
+public/uploads/*
+public/loginUploads/*
+public/downloads/*
+!public/uploads/.gitkeep
+!public/loginUploads/.gitkeep
+!public/downloads/.gitkeep
+
+# Speaker models (if regenerated)
+speaker_models/*.gmm
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+

@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const auth = require('../controllers/auth');
-const teacherModule = require('./teacher')
-const studentModule = require("./student");
-let ffmpeg = require('fluent-ffmpeg');
-const fs = require('fs')
+const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
-const mime = require('mime');
-const WaveFile = require('wavefile').WaveFile;
+
+// Controllers
+const auth = require('../controllers/auth');
+
+// Routes
+const teacherModule = require('./teacher');
+const studentModule = require("./student");
 
 
 

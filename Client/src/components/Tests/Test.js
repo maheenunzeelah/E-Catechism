@@ -121,7 +121,7 @@ class Test extends Component {
   renderList = () => {
     let filtered
     this.props.tests.filter(test => {
-      filtered = test.groups.filter(tes => {
+      filtered = test?.groups?.filter(tes => {
         //If value in searched bar matches the value of testname
         return (tes.testName.toLowerCase().indexOf(this.state.search) !== -1)
       })
@@ -132,7 +132,7 @@ class Test extends Component {
     if (filtered == undefined) {
 
       return this.props.tests.map(test => {
-        return test.groups.map((test, index) => {
+        return test?.groups?.map((test, index) => {
           return <div>
             {/* For preventing code replication function is called*/}
             {this.filteredList(test, index)}
@@ -170,7 +170,7 @@ class Test extends Component {
             <br></br>
 
             <div className="container" >
-              <div id="Test" class="w3-container w3-padding-16 " style={{ backgroundColor: "#fff0fb" }} >
+              <div id="Test" class="w3-container w3-padding-16 " style={{ backgroundColor: "#E6E6FA" }} >
                 <br />
 
                 <div class="w3-row-padding"  >
@@ -206,7 +206,7 @@ class Test extends Component {
 
             </div>
             {this.props.tests.map(test => {
-              isTest = test.groups.length > 0
+              isTest = test.groups?.length > 0
             })}
 
             {isTest ? this.DynamicButtons() : null}

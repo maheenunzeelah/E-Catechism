@@ -51,7 +51,7 @@ class Tests extends Component {
                   </div>
               
                   
-                  <button type="submit" className="btn btn-sm float-right btn-danger" onClick={this.handleClick} disabled={this.props.pristine}>
+                  <button type="submit" className="btn btn-sm float-right purple white-text" onClick={this.handleClick} disabled={this.props.pristine}>
                     Create Group
             </button>
                 </form>

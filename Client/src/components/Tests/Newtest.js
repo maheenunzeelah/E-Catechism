@@ -54,10 +54,10 @@ class Tests extends Component {
             <Field type="text" name="course" component={renderField} />
 
                   </label><br />
-                  <Link to="/dashboard/addQues" ><button className="btn btn-sm float-right btn-danger" disabled={this.state.isClicked}>
+                  <Link to="/dashboard/addQues" ><button className="btn btn-sm float-right black-text" disabled={this.state.isClicked}>
                     Start Adding Questions
             </button></Link>
-                  <button type="submit" className="btn btn-sm float-right btn-danger" onClick={this.handleClick} disabled={this.props.pristine}>
+                  <button type="submit" className="btn btn-sm float-right black-text" onClick={this.handleClick} disabled={this.props.pristine}>
                     Save
             </button>
                 </form>

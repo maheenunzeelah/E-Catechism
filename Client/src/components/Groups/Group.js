@@ -110,7 +110,7 @@ class Group extends Component {
 
           {/* black group bar */}
           <div class="container"  >
-            <div className="row grey darken-2 " id='tab'>
+            <div className="row white" id='tab'>
               <Link to="/Test" className="w3-bar-item w3-button tablink" ><i class="fa fa-window-maximize w3-margin-right" aria-hidden="true"></i>Group</Link>
             </div>
           </div>
@@ -135,7 +135,7 @@ class Group extends Component {
                   <input class="w3-input w3-border" type="text" placeholder=" Search Group name" onChange={(e) => this.handleChange(e)} value={this.state.search}></input>
                 </div>
                 <div class="w3-quarter w3-right" >
-                  <Link to='/dashboard/newGroup' class="w3-button w3-black">New Group +</Link>
+                  <Link to='/dashboard/newGroup' class="w3-button purple white-text">New Group +</Link>
                 </div>
 
               </div>

@@ -1,0 +1,8 @@
+numpy
+scipy
+scikit-learn
+python_speech_features
+sounddevice
+flask
+flask-cors
+cryptography

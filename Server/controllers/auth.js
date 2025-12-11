@@ -1,320 +1,461 @@
-
-
-
-// const ffmpeg = require('fluent-ffmpeg');
 const jwt = require('jsonwebtoken');
-const Teacher = require("../models/Teachers");
-const Student = require("../models/Students");
 const bcrypt = require('bcryptjs');
-var amqp = require('amqplib/callback_api');
-const minio = require('minio');
 const fs = require('fs');
 const path = require('path');
-const keys=require('../config/keys')
 const { spawn } = require('child_process');
+const minio = require('minio');
 
-var minioClient = new minio.Client({
-    endPoint: '127.0.0.1',
-    port: 9000,
-    useSSL: false,
-    accessKey: 'MaheenUnzeelah',
-    secretKey: 'Cryptography',
+// Models
+const Teacher = require('../models/Teachers');
+const Student = require('../models/Students');
 
+// Config
+const keys = require('../config/keys');
+
+// MinIO Client Configuration
+const minioClient = new minio.Client({
+    endPoint: process.env.MINIO_ENDPOINT || '127.0.0.1',
+    port: parseInt(process.env.MINIO_PORT) || 9000,
+    useSSL: process.env.MINIO_USE_SSL === 'true',
+    accessKey: process.env.MINIO_ACCESS_KEY || 'MaheenUnzeelah',
+    secretKey: process.env.MINIO_SECRET_KEY || 'Cryptography'
 });
 
-exports.teacherLoginController = (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    console.log(req.body)
-    console.log(email)
-    Teacher.findOne({ email }).then(teacher => {
-        console.log(teacher)
+/**
+ * Generate JWT token
+ * @param {Object} payload - Token payload
+ * @param {string} expiresIn - Token expiration time
+ * @returns {string} JWT token
+ */
+const generateToken = (payload, expiresIn = '7d') => {
+    return jwt.sign(payload, keys.secret, { expiresIn });
+};
+
+/**
+ * Teacher Login Controller
+ * POST /api/login
+ */
+exports.teacherLoginController = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Validation
+        if (!email || !password) {
+            return res.status(400).json({
+                error: 'Validation Error',
+                message: 'Email and password are required'
+            });
+        }
+
+        // Find teacher
+        const teacher = await Teacher.findOne({ email });
+        
         if (!teacher) {
-            return res.status(404).json({ email: 'Teacher not found' });
+            return res.status(404).json({
+                error: 'Authentication Failed',
+                message: 'Teacher not found with this email'
+            });
         }
-        bcrypt.compare(password, teacher.password)
-            .then(isMatch => {
-                if (isMatch) {
-                    var token = jwt.sign({ teacherid: teacher._id ,depart:teacher.department}, keys.secret);
-                    console.log(token);
-                    res.json({token});
-                }
-                else {
 
-                    return res.status(404).json({ password: 'Password Incorrect' });
-                }
-            })
-    })
-}
+        // Compare password
+        const isMatch = await bcrypt.compare(password, teacher.password);
+        
+        if (!isMatch) {
+            return res.status(401).json({
+                error: 'Authentication Failed',
+                message: 'Incorrect password'
+            });
+        }
 
-exports.teacherSignupController = (req, res) => {
-
-    var data = req.body;
-    Teacher.findOne({ email: data.email })
-        .then(teacher => {
-            if (teacher) {
-                return res.status(400).json({ email: 'Email alreday exists' });
-            }
-            else {
-                const teacher = new Teacher(data);
-                console.log(teacher._id)
-                bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(teacher.password, salt, (err, hash) => {
-                        if (err) throw err;
-                        teacher.password = hash;
-                        teacher.save()
-                            .then(teacher => {
-                                var token = jwt.sign({ teacherid: teacher._id,depart:teacher.department }, keys.secret);
-                                console.log(token);
-                                return res.json({token});
-                            })
-                    })
-                })
-            }
-
-        })
-
-        .catch((err) => {
-
-            console.log("Error: ", err);
-
-            res.status(500);
-
-            res.send("Something went wrong");
-
+        // Generate token
+        const token = generateToken({
+            teacherid: teacher._id,
+            depart: teacher.department,
+            role: 'teacher'
         });
 
-}
-
-
-
-
-
-
-exports.studentSignupController = (req, res, next) => {
-
-    studentData = req.body
-    console.log(studentData)
-    Student.findOne({ email: studentData.email })
-        .then(student => {
-            if (student) {
-                return res.status(400).json({ email: 'Email alreday exists' });
+        res.json({
+            success: true,
+            token,
+            user: {
+                id: teacher._id,
+                name: teacher.name,
+                email: teacher.email,
+                department: teacher.department
             }
-            else {
-                const student = new Student(studentData);
-                console.log(student)
-                bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(student.password, salt, (err, hash) => {
-                        if (err) throw err;
-                        student.password = hash;
-                        student.save()
-                            .then(student => {
-                                var token = jwt.sign({ studentid: student._id }, keys.secret);
-                                console.log(token);
-                                return res.json({ token, id: student._id });
-                            })
-
-                    })
-                })
-            }
-
-        })
-
-        .catch((err) => {
-
-            console.log("Error: ", err);
-
-            res.status(500).send("Something went wrong");
-
         });
 
-}
-
-
-
-exports.saveVoiceController = (req, res) => {
-
-    let dataToSend
-    let files = req.files
-    console.log(files)
-
-    let bucketName = files[0].originalname
-    files.map(file => {
-        fs.appendFile('signupVoices.txt', path.join(file.originalname, file.filename) + '\n', { 'flags': 'a+' }, (err) => {
-            console.log(err)
-        })
-    })
-
-    console.log(bucketName)
-    // const fileStream = fs.createReadStream(path)
-
-
-    minioClient.bucketExists(bucketName, (err, exists) => {
-        if (err) {
-            return console.log("erere", err)
-        }
-        if (!exists) {
-            //Make a bucket called europetrip.
-            new Promise((resolve, reject) => {
-                minioClient.makeBucket(bucketName, function (err) {
-                    if (err) reject(console.log(err))
-                    console.log('Bucket created successfully ')
-                    resolve();
-                })
-            }).then(function () {
-                files.map(file => {
-                    minioClient.fPutObject(bucketName, file.filename, file.path, function (err, etag) {
-                        if (err) return console.log(err)
-
-                    });
-                    console.log('Files uploaded successfully.')
-                })
-                const python = spawn('python', ['training_model.py']);
-                python.stdout.on('data', function (data) {
-                    console.log('Pipe data from python script ...');
-                    dataToSend = data.toString();
-                });
-                python.on('close', (code) => {
-                    console.log(`child process close all stdio with code ${code}`);
-                    // send data to browser
-                    console.log(dataToSend)
-                    fs.truncate("signupVoices.txt",0,function(){console.log('Signup deleted')})
-                });
-
-            })
-        }
-        if (exists)
-            console.log("Already exists")
-
-
+    } catch (error) {
+        console.error('Teacher Login Error:', error);
+        res.status(500).json({
+            error: 'Server Error',
+            message: 'An error occurred during login'
+        });
     }
-    )
+};
 
+/**
+ * Teacher Signup Controller
+ * POST /api/signup
+ */
+exports.teacherSignupController = async (req, res) => {
+    try {
+        const { email, password, name, department } = req.body;
 
-
-
-    res.send('Student Registered')
-
-
-
-
-    //     amqp.connect('amqp://localhost', function(error0, connection) {
-    //         console.log("runningg")
-    //     if (error0) {
-    //         throw error0;
-    //     }
-    //     connection.createChannel(function(error1, channel) {
-    //         if (error1) {
-    //             throw error1;
-    //         }
-
-    //         var queue = 'hello';
-
-
-    //         channel.assertQueue(queue, {
-
-    //             durable: false
-    //         });
-    //         channel.sendToQueue(queue, Buffer.from(JSON.stringify(file)));
-
-    //         console.log(" [x] Sent %s", file);
-    //     });
-    //     setTimeout(function() {
-    //         connection.close();
-
-
-    //     }, 500);
-
-    // });
-}
-
-exports.studentLoginController = (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    console.log(email)
-    Student.findOne({ email }).then(stud => {
-
-        if (!stud) {
-            return res.status(404).json({ email: 'Student not found' });
+        // Validation
+        if (!email || !password || !name) {
+            return res.status(400).json({
+                error: 'Validation Error',
+                message: 'Email, password, and name are required'
+            });
         }
-        bcrypt.compare(password, stud.password)
-            .then(isMatch => {
-                if (isMatch) {
-                    var token = jwt.sign({ studentid: stud._id },keys.secret);
-                    console.log(token);
-                    return res.json({ id: stud._id ,token});
-                }
-                else {
 
-                    return res.status(404).json({ password: 'Password Incorrect' });
-                }
-            })
-    })
-}
+        // Check if teacher already exists
+        const existingTeacher = await Teacher.findOne({ email });
+        
+        if (existingTeacher) {
+            return res.status(400).json({
+                error: 'Registration Failed',
+                message: 'Email already exists'
+            });
+        }
 
-exports.studentLoginVoiceController = (req, res) => {
-    
-    let files = req.files
-    files.map(file => {
-        fs.appendFile('loginVoices.txt', path.join(file.originalname, file.filename) + '\n', { 'flags': 'a+' }, (err) => {
-            // console.log(err)
-        })
-    })
-    const downPath = path.join(path.dirname(process.mainModule.filename), 'public', 'downloads')
+        // Hash password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
-    let bucketName = files[0].originalname
-    console.log(bucketName)
-    // const fileStream = fs.createReadStream(path)
-    files.map(file => {
-        var stream = minioClient.extensions.listObjectsV2WithMetadata(bucketName, '', true, '')
-        stream.on('data', function (obj) {
-            minioClient.fGetObject(bucketName, obj.name, path.join(downPath, bucketName, obj.name), function (err) {
-                if (err) {
-                    return console.log(err)
-                }
-                console.log('success')
-                fs.appendFile('matchVoices.txt', path.join(obj.name) + '\n', { 'flags': 'a+' }, (err) => {
-                    console.log(err)
-                })
-            })
-        })
-        stream.on('error', function (err) { console.log(err) })
-    })
-    // var dataToSend
-    // const python = spawn('python', ['test_performance.py']);
-    // python.stdout.on('data', function (data) {
-    //     console.log('Pipe data from python script ...');
-    //      dataToSend = data.toString();
-    // });
-    // python.on('close', (code) => {
-    //     console.log(`child process close all stdio with code ${code}`);
-    //     // send data to browser
-    //     console.log(dataToSend)
-    //     fs.truncate("loginVoices.txt",0,function(){console.log('')})
-    // });
-    res.send("login")
+        // Create new teacher
+        const teacher = new Teacher({
+            ...req.body,
+            password: hashedPassword
+        });
 
-    // minioClient.bucketExists(bucketName, function (err, exists) {
-    //     if (err) {
-    //         return console.log("erere", err)
-    //     }
-    //     if (!exists) {
-    //         //Make a bucket called europetrip.
-    //         minioClient.makeBucket(bucketName, function (err) {
-    //             if (err) return console.log(err)
+        await teacher.save();
 
-    //             console.log('Bucket created successfully ')
-    //         })
-    //     }
-    //    files.map(file=>{
-    //     minioClient.fPutObject(bucketName, file.filename, file.path, function (err, etag) {
-    //         if (err) return console.log(err)
+        // Generate token
+        const token = generateToken({
+            teacherid: teacher._id,
+            depart: teacher.department,
+            role: 'teacher'
+        });
 
-    //     });
+        res.status(201).json({
+            success: true,
+            token,
+            user: {
+                id: teacher._id,
+                name: teacher.name,
+                email: teacher.email,
+                department: teacher.department
+            }
+        });
 
-    // })
+    } catch (error) {
+        console.error('Teacher Signup Error:', error);
+        
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({
+                error: 'Validation Error',
+                message: error.message
+            });
+        }
+        
+        res.status(500).json({
+            error: 'Server Error',
+            message: 'An error occurred during registration'
+        });
+    }
+};
 
-    // })
-    // console.log('Files uploaded successfully.')
-    // res.send('Student Registered')
-}
+/**
+ * Student Signup Controller
+ * POST /api/signup/student
+ */
+exports.studentSignupController = async (req, res) => {
+    try {
+        const { email, password, name, rollNo, batch, department } = req.body;
+
+        // Validation
+        if (!email || !password || !name) {
+            return res.status(400).json({
+                error: 'Validation Error',
+                message: 'Email, password, and name are required'
+            });
+        }
+
+        // Check if student already exists
+        const existingStudent = await Student.findOne({ email });
+        
+        if (existingStudent) {
+            return res.status(400).json({
+                error: 'Registration Failed',
+                message: 'Email already exists'
+            });
+        }
+
+        // Hash password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        // Create new student
+        const student = new Student({
+            ...req.body,
+            password: hashedPassword
+        });
+
+        await student.save();
+
+        // Generate token
+        const token = generateToken({
+            studentid: student._id,
+            role: 'student'
+        });
+
+        res.status(201).json({
+            success: true,
+            token,
+            id: student._id,
+            user: {
+                id: student._id,
+                name: student.name,
+                email: student.email,
+                rollNo: student.rollNo,
+                batch: student.batch,
+                department: student.department
+            }
+        });
+
+    } catch (error) {
+        console.error('Student Signup Error:', error);
+        
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({
+                error: 'Validation Error',
+                message: error.message
+            });
+        }
+        
+        res.status(500).json({
+            error: 'Server Error',
+            message: 'An error occurred during registration'
+        });
+    }
+};
+
+/**
+ * Save Voice Controller - For voice authentication during signup
+ * POST /api/signup/studentVoice
+ */
+exports.saveVoiceController = async (req, res) => {
+    try {
+        const files = req.files;
+
+        if (!files || files.length === 0) {
+            return res.status(400).json({
+                error: 'Validation Error',
+                message: 'No voice files uploaded'
+            });
+        }
+
+        const bucketName = files[0].originalname;
+        
+        // Append file paths to signup voices text file
+        files.forEach(file => {
+            const filePath = path.join(file.originalname, file.filename) + '\n';
+            fs.appendFileSync('signupVoices.txt', filePath, { flag: 'a+' });
+        });
+
+        // Check if bucket exists
+        const bucketExists = await minioClient.bucketExists(bucketName);
+
+        if (!bucketExists) {
+            // Create bucket
+            await minioClient.makeBucket(bucketName);
+            console.log('Bucket created successfully:', bucketName);
+
+            // Upload files to MinIO
+            for (const file of files) {
+                await minioClient.fPutObject(bucketName, file.filename, file.path);
+            }
+            console.log('Files uploaded successfully');
+
+            // Train voice model
+            const python = spawn('python', ['training_model.py']);
+            
+            python.stdout.on('data', (data) => {
+                console.log('Python output:', data.toString());
+            });
+
+            python.stderr.on('data', (data) => {
+                console.error('Python error:', data.toString());
+            });
+
+            python.on('close', (code) => {
+                console.log(`Training process exited with code ${code}`);
+                
+                // Clear signup voices file
+                fs.truncate('signupVoices.txt', 0, (err) => {
+                    if (err) console.error('Error clearing signupVoices.txt:', err);
+                    else console.log('Signup voices file cleared');
+                });
+            });
+        } else {
+            console.log('Bucket already exists:', bucketName);
+        }
+
+        res.json({
+            success: true,
+            message: 'Voice samples saved successfully'
+        });
+
+    } catch (error) {
+        console.error('Save Voice Error:', error);
+        res.status(500).json({
+            error: 'Server Error',
+            message: 'An error occurred while saving voice samples'
+        });
+    }
+};
+
+/**
+ * Student Login Controller
+ * POST /api/login/student
+ */
+exports.studentLoginController = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Validation
+        if (!email || !password) {
+            return res.status(400).json({
+                error: 'Validation Error',
+                message: 'Email and password are required'
+            });
+        }
+
+        // Find student
+        const student = await Student.findOne({ email });
+        
+        if (!student) {
+            return res.status(404).json({
+                error: 'Authentication Failed',
+                message: 'Student not found with this email'
+            });
+        }
+
+        // Compare password
+        const isMatch = await bcrypt.compare(password, student.password);
+        
+        if (!isMatch) {
+            return res.status(401).json({
+                error: 'Authentication Failed',
+                message: 'Incorrect password'
+            });
+        }
+
+        // Generate token
+        const token = generateToken({
+            studentid: student._id,
+            role: 'student'
+        });
+
+        res.json({
+            success: true,
+            token,
+            id: student._id,
+            user: {
+                id: student._id,
+                name: student.name,
+                email: student.email,
+                rollNo: student.rollNo,
+                batch: student.batch,
+                department: student.department
+            }
+        });
+
+    } catch (error) {
+        console.error('Student Login Error:', error);
+        res.status(500).json({
+            error: 'Server Error',
+            message: 'An error occurred during login'
+        });
+    }
+};
+
+/**
+ * Student Voice Authentication Controller
+ * POST /api/login/studentVoiceAuth
+ */
+exports.studentLoginVoiceController = async (req, res) => {
+    try {
+        const files = req.files;
+
+        if (!files || files.length === 0) {
+            return res.status(400).json({
+                error: 'Validation Error',
+                message: 'No voice files uploaded'
+            });
+        }
+
+        const bucketName = files[0].originalname;
+        const downPath = path.join(path.dirname(process.mainModule.filename), 'public', 'downloads');
+
+        // Append file paths to login voices text file
+        files.forEach(file => {
+            const filePath = path.join(file.originalname, file.filename) + '\n';
+            fs.appendFileSync('loginVoices.txt', filePath, { flag: 'a+' });
+        });
+
+        // Download files from MinIO for verification
+        for (const file of files) {
+            const stream = minioClient.extensions.listObjectsV2WithMetadata(bucketName, '', true, '');
+            
+            stream.on('data', (obj) => {
+                const downloadPath = path.join(downPath, bucketName, obj.name);
+                
+                // Ensure directory exists
+                fs.mkdirSync(path.dirname(downloadPath), { recursive: true });
+                
+                minioClient.fGetObject(bucketName, obj.name, downloadPath, (err) => {
+                    if (err) {
+                        console.error('Error downloading file:', err);
+                        return;
+                    }
+                    
+                    console.log('File downloaded successfully:', obj.name);
+                    fs.appendFileSync('matchVoices.txt', obj.name + '\n', { flag: 'a+' });
+                });
+            });
+
+            stream.on('error', (err) => {
+                console.error('Stream error:', err);
+            });
+        }
+
+        // TODO: Implement voice matching with Python script
+        // Uncomment when ready to use
+        /*
+        const python = spawn('python', ['test_performance.py']);
+        
+        python.stdout.on('data', (data) => {
+            console.log('Voice match result:', data.toString());
+        });
+
+        python.on('close', (code) => {
+            fs.truncate('loginVoices.txt', 0, () => {});
+        });
+        */
+
+        res.json({
+            success: true,
+            message: 'Voice authentication processed'
+        });
+
+    } catch (error) {
+        console.error('Voice Login Error:', error);
+        res.status(500).json({
+            error: 'Server Error',
+            message: 'An error occurred during voice authentication'
+        });
+    }
+};

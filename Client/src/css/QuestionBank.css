@@ -107,7 +107,7 @@ margin-top: -20px;
 
     
     #ansoptions{
-    
+        padding: 0!important;
         list-style-type: upper-alpha;
     }
     

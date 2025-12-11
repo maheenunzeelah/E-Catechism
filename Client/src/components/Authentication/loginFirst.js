@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
 import validate from '../validate';
 import {renderField} from '../renderField';
-import {teacherLogin,studentAuth} from '../../actions'; 
+import {teacherLogin,studentAuth,setCurrentTeacher} from '../../actions'; 
 import PropTypes from 'prop-types';
 
 
@@ -52,25 +52,25 @@ class LoginFirst extends Component {
      this.props.studentAuth(formValues)
      this.props.onNext();
     }
-   else
-    this.props.teacherLogin(formValues);
-  
-  //  e.preventDefault();
-  //  axios.post('http://localhost:3001/login',{email:this.state.email,password:this.state.password})
-  //  .then(res => {
-  //    if(res.data==="user not found"){
-  //      alert(res.data);
-  //      window.location.reload();
-  //    }
-  //    else{
-  //       const token = res.data;
-  //       localStorage.setItem("authorization",token);
-  //       alert("login");
-  //       window.location.replace("/dashboard");
-  //       }
+   else {
+     // Teacher login - direct access (no Node.js API, no voice)
+     const teacherData = {
+       teacherid: formValues.email.split('@')[0],
+       email: formValues.email,
+       name: formValues.email.split('@')[0],
+       role: 'teacher',
+       isAuthenticatedTeacher: true
+     };
      
-  //  })
-
+     // Store teacher data
+     localStorage.setItem('teacherAuth', JSON.stringify(teacherData));
+     
+     // Dispatch to Redux
+     this.props.setCurrentTeacher(teacherData);
+     
+     // Direct redirect to dashboard
+     window.location.replace('/dashboard');
+   }
   }
  
      
@@ -134,4 +134,4 @@ destroyOnUnmount: false,
 validate
 })(LoginFirst);
 
-export default withRouter(connect(mapStateToProps,{teacherLogin,studentAuth})(formWrapped)); 
+export default withRouter(connect(mapStateToProps,{teacherLogin,studentAuth,setCurrentTeacher})(formWrapped)); 

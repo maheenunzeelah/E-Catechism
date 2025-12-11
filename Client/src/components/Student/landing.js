@@ -31,7 +31,7 @@ function Landing(props) {
   React.useEffect(() => {
     props.groupTest()
   }, [])
-  if (!isEmpty(props.groups)) {
+  if (!isEmpty(props?.groups)) {
     return (
       <div className="container mt-5 mb-5">
         {props.groups.map((group, i) => {

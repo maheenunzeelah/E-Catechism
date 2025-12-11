@@ -74,7 +74,7 @@ handleSubmit=(e)=>{
         return this.props.ques.map(que=>{
                    let quesNo=((que.currentPage-1)*que.ques_per_page)+1
                    console.log(que.ques)
-                  return que.ques.length>0? (
+                  return que?.ques?.length>0? (
                     que.ques.map(((qu)=>{
                         console.log(qu)
                         return(
@@ -101,7 +101,7 @@ handleSubmit=(e)=>{
       <div id={`demo${qu._id}`} class="container collapse">
 
     {qu.type==="MCQs"?(
-         <ol  id="ansoptions">
+         <ol id="ansoptions">
          {qu.answers.map(answer=>
          {    return<div>
                   
@@ -288,7 +288,7 @@ handleSubmit=(e)=>{
 
                         <div className="w3-third" >
                                 <br></br>
-                        <button className="w3-button w3-dark-grey" type="submit" id="btn">Go</button>
+                        <button className="w3-button purple white-text" type="submit" id="btn">Go</button>
                         </div>
                 
           </div>
@@ -304,8 +304,8 @@ handleSubmit=(e)=>{
 
         <div className="col-xl-3  col-lg-3 col-md-3 col-sm-4 col-5">
                 <div className="dropdown">
-                <button  className="btn pink white-text dropdown-toggle " data-toggle="dropdown">
-                        Add Questions in Test
+                <button  className="btn pink white-text dropdown-toggle" data-toggle="dropdown">
+                        Add Questions
                 </button>
 
                 <div className="dropdown-menu">
@@ -334,7 +334,7 @@ handleSubmit=(e)=>{
 </div>
   {this.props.ques.map(que=>{
 
-                   isQues=que.ques.length
+                   isQues=que.ques?.length
                 })
 }
 {isQues!=0?this.DynamicButtons():null}

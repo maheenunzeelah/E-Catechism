@@ -186,17 +186,34 @@ button[class*="MDBBtn"].pink {
   color: white !important;
 }
 
-.MDBBtn.color-black,
-.MDBBtn[color="black"] {
-  background-color: var(--text-primary) !important;
+/* IMPORTANT: Override black color buttons - use purple theme instead */
+.MDBBtn[color="black"],
+button[color="black"],
+.MDBBtn.color-black {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.MDBBtn[color="black"]:hover,
+button[color="black"]:hover,
+.MDBBtn.color-black:hover {
+  background-color: rgba(255, 255, 255, 0.3) !important;
   color: white !important;
 }
 
-.MDBBtn.color-black.basic,
-.MDBBtn[color="black"].basic {
+.MDBBtn[color="black"].basic,
+button[color="black"].basic,
+.MDBBtn.color-black.basic {
   background-color: transparent !important;
-  color: var(--text-primary) !important;
-  border: 1px solid var(--text-primary) !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.MDBBtn[color="black"].basic:hover,
+button[color="black"].basic:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
 }
 
 /* COMPLETELY REMOVE #e91e63 - Replace with theme purple */
@@ -275,7 +292,7 @@ select {
   color: var(--text-primary) !important;
   border: 1px solid var(--border-color) !important;
   border-radius: 8px !important;
-  padding: 10px 14px !important;
+  /* padding: 10px 14px !important; */
   transition: all 0.3s ease !important;
 }
 
@@ -353,6 +370,40 @@ a:hover {
   transform: translateY(-2px) !important;
 }
 
+/* Ensure all buttons have readable text */
+.btn,
+button,
+.MDBBtn,
+[class*="btn-"],
+[class*="MDBBtn"] {
+  min-height: 36px;
+  padding: 8px 16px !important;
+}
+
+/* Fix outline buttons */
+.btn-outline-black,
+.btn-outline-dark {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.btn-outline-black:hover,
+.btn-outline-dark:hover {
+  background-color: var(--purple-light-bg) !important;
+  color: var(--purple-primary) !important;
+  border-color: var(--purple-primary) !important;
+}
+
+/* Blue text links should be purple */
+.blue-text {
+  color: var(--purple-primary) !important;
+}
+
+.blue-text:hover {
+  color: var(--purple-light) !important;
+}
+
 /* Professional List Groups */
 .list-group-item {
   background-color: var(--bg-primary) !important;
@@ -384,5 +435,62 @@ td {
   background-color: var(--bg-primary) !important;
   color: var(--text-primary) !important;
   border-color: var(--border-color) !important;
+}
+
+/* Dropdown styling */
+.dropdown-toggle,
+.MDBDropdownToggle,
+[class*="dropdown-toggle"] {
+  min-width: 100px;
+  text-align: left;
+}
+
+.dropdown-toggle::after,
+.MDBDropdownToggle::after {
+  margin-left: 8px;
+}
+
+/* Ensure dropdown menus are readable */
+.dropdown-menu,
+.MDBDropdownMenu {
+  background-color: var(--bg-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-radius: 8px !important;
+}
+
+.dropdown-item,
+.MDBDropdownItem {
+  color: var(--text-primary) !important;
+  transition: all 0.2s ease !important;
+}
+
+.dropdown-item:hover,
+.MDBDropdownItem:hover {
+  background-color: var(--purple-light-bg) !important;
+  color: var(--purple-primary) !important;
+}
+
+/* Navbar on purple background - ensure white text */
+.navbar.dark .dropdown-toggle,
+.navbar[style*="6D28D9"] .dropdown-toggle,
+.navbar[style*="5B21B6"] .dropdown-toggle,
+[style*="background: linear-gradient(135deg, #6D28D9"] .dropdown-toggle,
+[style*="background: linear-gradient(135deg, #6D28D9"] .MDBDropdownToggle,
+[style*="background: linear-gradient(135deg, #6D28D9"] button {
+  color: white !important;
+}
+
+/* Collapsible buttons */
+.collapsible {
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: all 0.3s ease !important;
+}
+
+.collapsible:hover {
+  background-color: var(--purple-light-bg) !important;
+  border-color: var(--purple-primary) !important;
 }
 

@@ -132,7 +132,7 @@ class AddQues extends Component {
                             {this.state.type === "MCQs" ? (
                                 /*If MCQs select how many options should be there for answers*/
                                 <div className="col-md-3">
-                                    <div className="jumbotron blue lighten-2 black-text">
+                                    <div className="jumbotron purple white-text">
                                         <label for="ansOptions">Choose availabe options</label>
                                         <select className="form-control" id="ansOptions" onChange={this.availAns}>
                                             <option value="2" >2</option>
@@ -165,7 +165,7 @@ class AddQues extends Component {
                             (<div>
                                 <h3 style={{color:'#6D28D9'}}>Answer </h3>
                                 <div className="jumbotron" style={{ width: "650px", height: "180px", margin: "20px" }}>
-                                    <p className="lead">This is the correct answer</p>
+                                    <p className="black-text">This is the correct answer</p>
                                     <label>
                                         <Field type="radio" name="answer" component="input" value="true" />
                                         True

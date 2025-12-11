@@ -38,18 +38,17 @@ class Signup extends Component {
       <div>
         {page === 1 && <SignupFirst role={this.props.location.state.role} onNext={this.nextPage} />}
        
-        {page === 2 && (
+        {page === 2 && (<SignupSecond actionCreator={this.props.studentSignup} RecNo={5}
+          previousPage={this.previousPage}
+          onNext={this.nextPage}
+        />
+        )}
+         {page === 3 && (
           <SignupThird
             previousPage={this.previousPage}
             onNext={this.nextPage}
             onSubmit={onSubmit}
           />
-        )}
-         {page === 3 && (<SignupSecond actionCreator={this.props.studentSignup} RecNo={5}
-          previousPage={this.previousPage}
-          onNext={this.nextPage}
-        />
-     
         )}
       </div>
     )

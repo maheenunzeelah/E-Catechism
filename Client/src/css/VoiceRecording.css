@@ -1,0 +1,83 @@
+/* Voice Recording Component Styles */
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+.pulse-animation {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(109, 40, 217, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(109, 40, 217, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(109, 40, 217, 0);
+  }
+}
+
+.recording-indicator {
+  animation: ripple 1.5s infinite;
+}
+
+/* Sample Card Hover Effects */
+.sample-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.sample-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+.sample-card.recorded {
+  background: linear-gradient(135deg, #f0fff4 0%, #e6ffed 100%);
+}
+
+.sample-card.recording {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+}
+
+/* Progress Bar Custom Styling */
+.voice-progress-bar {
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #6D28D9 0%, #9333EA 100%);
+}
+
+/* Success Animation */
+@keyframes checkmark {
+  0% {
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+.success-checkmark {
+  animation: checkmark 0.6s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sample-card {
+    margin-bottom: 15px;
+  }
+}
+
